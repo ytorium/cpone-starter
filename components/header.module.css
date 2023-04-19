@@ -90,3 +90,8 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
+.imageText {
+  display: flex;
+  align: center;
+}

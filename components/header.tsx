@@ -1,4 +1,5 @@
-import Head from 'next/head'
+import Head from "next/head"
+import Image from "next/image"
 import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
@@ -17,6 +18,15 @@ export default function Header() {
         <meta name="description" content="Cryptographic Proof of NFT Endorsement" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <div className={styles.imageText}>
+      <Image
+          src="/buzz-on-moon.jpeg"
+          alt="Buzz on the moon"
+          width={75}
+          height={60}
+        />  &nbsp;<h2>Cryptographic Proof of NFT Endorsement</h2>
+      </div>
 
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
@@ -74,3 +84,4 @@ export default function Header() {
     </header>
   )
 }
+
