@@ -95,3 +95,8 @@
   display: flex;
   align: center;
 }
+
+.orangeOne {
+  color:#fa8e47;
+  font-size: 123%;
+}
