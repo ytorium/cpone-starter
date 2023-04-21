@@ -9,20 +9,28 @@ import styles from "./header.module.css"
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
+
 export default function Header() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
 
   const [address, setAddress] = useState("");
   const [network, setNetwork] = useState("");
-  const getMinaAccounts = async () => await window.mina.requestAccounts();
-  const getMinaNetwork = async () => await window.mina.requestNetwork();
-  React.useEffect(async () => {
-    if (window.mina && address === "") {
+  const getMinaAccounts = async () => await (window as any).mina.requestAccounts();
+  const getMinaNetwork = async () => await (window as any).mina.requestNetwork();
+
+  React.useEffect(() => {
+  (async () => {
+    if ((window as any).mina && address === "") {
       const accounts = await getMinaAccounts();
       setAddress(accounts[0]);
       setNetwork(await getMinaNetwork());
     }
+  })();
+
+  return () => {
+    // this now gets called when the component unmounts
+  };
   }, []);
 
   return (

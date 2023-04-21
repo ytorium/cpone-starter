@@ -1,4 +1,4 @@
-export const walletFormat = (address, digits = 4) => {
+export const walletFormat = (address : any, digits = 4) => {
   return (
     address.substring(0, digits) +
     "..." +
