@@ -3,7 +3,6 @@ import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
-import { walletFormat } from "../utils"
 import styles from "./header.module.css"
 
 // The approach used in this component shows how to build a sign in and sign out
@@ -13,25 +12,6 @@ import styles from "./header.module.css"
 export default function Header() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
-
-  const [address, setAddress] = useState("");
-  const [network, setNetwork] = useState("");
-  const getMinaAccounts = async () => await (window as any).mina.requestAccounts();
-  const getMinaNetwork = async () => await (window as any).mina.requestNetwork();
-
-  React.useEffect(() => {
-  (async () => {
-    if ((window as any).mina && address === "") {
-      const accounts = await getMinaAccounts();
-      setAddress(accounts[0]);
-      setNetwork(await getMinaNetwork());
-    }
-  })();
-
-  return () => {
-    // this now gets called when the component unmounts
-  };
-  }, []);
 
   return (
     <header>
@@ -49,7 +29,6 @@ export default function Header() {
           height={60}
         />  &nbsp;<h2><div className={styles.orangeOne}>Cryptographic Proof of NFT Endorsement</div></h2>
       </div>
-      <div><p>Connected to Mina account: {walletFormat(address)}</p></div>
 
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
